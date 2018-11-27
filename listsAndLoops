@@ -1,0 +1,13 @@
+def main():
+    friendList = ["Bob", "Harry", "Abby"]
+
+    for x in friendList:
+        print(x)
+
+    i = 1
+    while i < 6:
+        print(i)
+        i += 1
+
+    print(friendList[0])
+    print(friendList[1])
