@@ -1,0 +1,147 @@
+import time
+import random
+
+def main():
+    lives = 2
+    bad = False
+    obstacleList = ["bear", "dragon", "meanWizard"]
+
+    # Establishes the setting and gameplay
+    print("==================================================================")
+    print("Welcome to the forest. It's full of terrible things and beautiful treasures. For whatever reason, you have set out to travel through the forest.")
+    print()
+    time.sleep(1)
+    name = input("What is your name? Answer: ")
+    print()
+    time.sleep(1)
+    print("Greetings, " + name + ". Currently, you have " + str(lives) + " lives. Navigate your way through the forest and try not to die!")
+    print("==================================================================")
+    time.sleep(1)
+
+    # Plot
+    
+    while int(len(obstacleList)) > 0 and int(lives) > 0:
+        whichVill = random.randint(0, (len(obstacleList)-1))
+        if (obstacleList[whichVill] == "bear"):
+            print("Bear")
+            lives = bear(lives)
+            obstacleList.pop(whichVill)
+            print(obstacleList)
+        elif (obstacleList[whichVill] == "dragon"):
+            print("Dragon")
+            lives = dragon(lives)
+            obstacleList.pop(whichVill)
+            print(obstacleList)
+        elif (obstacleList[whichVill] == "meanWizard"):
+            print("Mean Wizard")
+            lives = meanWizard(lives)
+            obstacleList.pop(whichVill)
+            print(obstacleList)
+            
+    if bad == False:
+        getGoodEpilogue(name)
+
+## necessary functions
+
+def deathReport(lives):
+    print("You die.")
+    print("==================================================================")
+    if lives == 0:
+        bad = True
+        getBadEpilogue()
+    else:
+        print("You use one of your lives to revive yourself! You have " + str(lives) + " lives left. Let the journey continue!")
+        print("==================================================================")
+
+def getBadEpilogue():
+    time.sleep(2)
+    print("Unfortunately, you're out of lives. Your journey ends here.")
+    print("==================================================================")
+    
+
+def getGoodEpilogue(name):
+    print("You break through the treeline. You've successfully passed through the forest! Congratulations " + name + "!")
+    print("==================================================================")
+
+## VILLIANS
+
+def bear(lives):
+    print("You make your way through the trees.")
+    print()
+    time.sleep(1)
+    print("You hear a rustling in the grass. Startled, you stumble backwards.")
+    print()
+    time.sleep(1)
+    print("A form emerges from the bushes. It's a massive black bear.")
+    print()
+    time.sleep(1)
+    print("You have the option of climbing up a tree or channeling your inner spirit animal and trying to scare it off.")
+    print("==================================================================")
+    guess=input("Which do you do? [climb/scare] Answer: ")
+    print("==================================================================")
+    answer='scare'
+    if (guess==answer):
+        time.sleep(1)
+        # no change in lives
+        print("You have the spirit animal of a chihuahua, but the stomping and yelling miraculously do the trick and the bear runs off.")
+        print()
+        time.sleep(1)
+        print("You continue on your way, feeling a bit proud of yourself and very relieved.")
+        print("==================================================================")
+    else:
+        time.sleep(1)
+        lives = lives - 1
+        print("You scale up the closest tree and the bear follows right up after you.")
+        print()
+        time.sleep(1)
+        print("The bear definitely eats you.")
+        print("==================================================================")
+        deathReport(lives)
+    return lives
+
+def dragon(lives):
+    print("You enter a small clearing and suddenly hear flapping above you. Lookoing up, you see a dragon swooping down on you!")
+    print()
+    time.sleep(1)
+    print("You can run back into the trees or use your shield as a pitiful hiding spot.")
+    print("==================================================================")
+    guess=input("Which will you choose? [run/shield] Answer: ")
+    print("==================================================================")
+    answer='shield'
+    if (guess==answer):
+        time.sleep(1)
+        # no change in lives
+        print("The dragon breathes fire down at you, but your shield protects you!")
+        print()
+        time.sleep(1)
+        print("As it so happens, the dragon has a primitive understanding of object perminance and flies away, thinking that you've disappeared.")
+        print("==================================================================")
+    else:
+        time.sleep(1)
+        print("The dragon breathes fire down at you and roasts you and half the forest to a crisp.")
+        print("==================================================================")
+        lives = lives - 1
+        time.sleep(1)
+        deathReport(lives)
+    return lives
+
+def meanWizard(lives):
+    time.sleep(1)
+    print("You come across another person, setting up camp. You start top call out in greeting but they whip around with a wand in hand and a very hostile look on their face.")
+    print()
+    time.sleep(1)
+    print("You can try to reason or you can try to attack before they can get a spell out.")
+    print("==================================================================")
+    guess=input("Which will you choose? [reason/attack] Answer: ")
+    print("==================================================================")
+    answer='reason'
+    if (guess==answer):
+        print("You put your hands up and the wizard visibally relaxes. You talk it out and they let you go.")
+        # no change in lives
+        print("==================================================================")
+    else:
+        print("You break out in a sprint towards them, but they have magic and you're no match. They vaporize you with a quick spell.")
+        lives = lives - 1
+        print("==================================================================")
+        deathReport(lives)
+    return lives
